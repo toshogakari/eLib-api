@@ -1,0 +1,2 @@
+class BookCase < ApplicationRecord
+end
