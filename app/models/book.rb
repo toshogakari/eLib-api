@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  belongs_to :book_cases
+  belongs_to :category
   has_many :book_cases
   has_many :users, through: :book_cases
   has_many :tag_has_books
