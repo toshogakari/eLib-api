@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108015643) do
+ActiveRecord::Schema.define(version: 20170110082135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,12 +34,14 @@ ActiveRecord::Schema.define(version: 20161108015643) do
     t.string   "title",        limit: 255, default: "",  null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 45, default: "", null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true, using: :btree
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -60,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161108015643) do
     t.string   "name",       limit: 45, default: "", null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true, using: :btree
   end
 
   create_table "tag_has_books", force: :cascade do |t|
@@ -75,6 +78,7 @@ ActiveRecord::Schema.define(version: 20161108015643) do
     t.string   "name",       limit: 45, default: "", null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
   create_table "user_has_skills", force: :cascade do |t|
@@ -95,7 +99,9 @@ ActiveRecord::Schema.define(version: 20161108015643) do
     t.integer  "job_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["job_id"], name: "index_users_on_job_id", using: :btree
+    t.index ["name"], name: "index_users_on_name", unique: true, using: :btree
   end
 
   add_foreign_key "book_cases", "books"
