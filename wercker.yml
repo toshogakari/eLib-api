@@ -16,3 +16,10 @@ build:
       name: rspec
       code: bundle exec rspec
 
+after-steps:
+  - slack-notifier:
+    url: $SLACK_URL
+    channel: newsfeed
+    username: werckerbot
+    notify_on: "failed"
+
