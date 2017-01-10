@@ -16,7 +16,7 @@ build:
       name: rspec
       code: bundle exec rspec
 
-after-steps:
+slack:
   - slack-notifier:
     url: $SLACK_URL
     channel: newsfeed
