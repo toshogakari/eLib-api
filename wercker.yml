@@ -6,20 +6,16 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
-  # - mongo
-  # http://devcenter.wercker.com/docs/services/mongodb.html
-
 build:
   steps:
     - bundle-install
     - script:
       name: rspec
       code: bundle exec rspec
-
-slack:
-  - slack-notifier:
-    url: $SLACK_URL
-    channel: newsfeed
-    username: werckerbot
-    notify_on: "failed"
+  after-steps:
+    - slack-notifier:
+      url: $SLACK_URL
+      channel: newsfeed
+      username: werckerbot
+      notify_on: "failed"
 
