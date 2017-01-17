@@ -8,7 +8,13 @@ services:
 
 build:
   steps:
-    - bundle-install
+    - script:
+      name: apply environment variables
+      code: |
+        export CPU_CORES="$(cat /proc/cpuinfo | grep "cpu cores" | wc -l)"
+    - bundle-install:
+      without: development production
+      jobs: ${CPU_CORES}
     - script:
       name: rspec
       code: bundle exec rspec
