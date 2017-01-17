@@ -4,12 +4,15 @@ ruby '2.3.3'
 
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg'
-gem 'puma', '~> 3.0'
 # gem 'redis', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'rack-cors'
 
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 group :development, :test do
+  gem 'puma', '~> 3.0'
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -39,5 +42,7 @@ group :test do
   gem 'coveralls', require: false
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :production do
+  gem 'unicorn', '~> 5.0'
+end
+
