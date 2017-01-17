@@ -4,4 +4,5 @@ app:
   build:
     image: registry.gitlab.com/pyar6329/elib-api
     dockerfile: Dockerfile
+  cached: true
 
