@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.3'
 
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg'
@@ -12,6 +13,8 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+#  gem 'airborne' # activesupport < 5.0
+  gem 'bullet'
 end
 
 group :development do
@@ -32,9 +35,6 @@ group :test do
   gem 'fuubar'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'launchy'
   gem 'database_cleaner'
   gem 'coveralls', require: false
 end
