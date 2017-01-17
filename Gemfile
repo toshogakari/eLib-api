@@ -34,9 +34,6 @@ group :test do
   gem 'fuubar'
   gem 'ffaker'
   gem 'shoulda-matchers'
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'launchy'
   gem 'database_cleaner'
   gem 'coveralls', require: false
 end
