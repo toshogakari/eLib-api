@@ -2,13 +2,10 @@ FROM ruby:2.3.3-alpine
 MAINTAINER Tsukasa Arima
 
 ARG DOCKERIZE_VERSION=v0.3.0
-ENV RAILS_ENV=production PATH=/usr/src/app/bin:$PATH
-
-COPY docker-entrypoint.sh /usr/local/bin/
+ENV RAILS_ENV=production RACK_ENV=production PATH=/usr/src/app/bin:$PATH
 
 RUN set -x \
     && mkdir -p /usr/src/app \
-    && chmod u+x /usr/local/bin/docker-entrypoint.sh \
     && apk add --update --upgrade --no-cache --virtual .rails-dependency-packages \
         ruby-dev zlib-dev libxml2-dev libxml2-utils libxslt-dev tzdata yaml-dev \
         readline-dev libpq bash \
@@ -20,8 +17,10 @@ RUN set -x \
     && apk del .dockerize-packages
 
 COPY Gemfile* /usr/src/app/
+COPY docker-entrypoint.sh /usr/local/bin/
 
 RUN set -x \
+    && chmod u+x /usr/local/bin/docker-entrypoint.sh \
     && apk add --update --upgrade --no-cache --virtual .build-packages openssl-dev \
         ca-certificates wget curl-dev build-base alpine-sdk linux-headers paxctl \
         make gcc g++ libgcc libstdc++ gnupg postgresql-dev \
@@ -29,7 +28,7 @@ RUN set -x \
     && gem update --system \
     && gem update bundler \
     && CPU_CORES="$(cat /proc/cpuinfo | grep "cpu cores" | wc -l)" \
-    && bundle install --jobs=${CPU_CORES} --without development test \
+    && bundle install --jobs=${CPU_CORES} --retry 5 --without development test \
     && apk del .build-packages
 
 COPY . /usr/src/app/
