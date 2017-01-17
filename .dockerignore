@@ -23,3 +23,7 @@ vendor/bundle
 .rvmrc
 .ruby-version
 .DS_Store
+.envrc
+.bin
+.bundle
+
