@@ -1,0 +1,26 @@
+box: ruby:2.3
+services:
+  - id: postgres
+    env:
+      POSTGRES_DB: elibtest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+build:
+  steps:
+    - script:
+      name: apply environment variables
+      code: |
+        export CPU_CORES="$(cat /proc/cpuinfo | grep "cpu cores" | wc -l)"
+    - bundle-install:
+      without: development production
+      jobs: ${CPU_CORES}
+    - script:
+      name: rspec
+      code: bundle exec rspec
+  after-steps:
+    - slack-notifier:
+      url: $SLACK_URL
+      channel: newsfeed
+      username: werckerbot
+
