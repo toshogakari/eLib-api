@@ -48,6 +48,9 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    bullet (5.5.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
     capybara (2.11.0)
       addressable
@@ -201,6 +204,7 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicode-display_width (0.1.1)
+    uniform_notifier (1.10.0)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -213,6 +217,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bullet
   byebug
   capybara
   coveralls
@@ -237,6 +242,9 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+
+RUBY VERSION
+   ruby 2.3.3p222
 
 BUNDLED WITH
    1.13.7
