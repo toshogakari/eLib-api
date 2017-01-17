@@ -49,6 +49,11 @@ RSpec.configure do |config|
     end
   end
 
+  # factory girl settings
+  config.include FactoryGirl::Syntax::Methods
+  config.before(:suite) do
+    FactoryGirl.reload
+  end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
