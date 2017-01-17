@@ -19,11 +19,9 @@ RUN set -x \
     && rm dockerize-linux-amd64-${DOCKERIZE_VERSION}.tar.gz \
     && apk del .dockerize-packages
 
-ONBUILD COPY app/Gemfile* /usr/src/app/
+COPY Gemfile* /usr/src/app/
 
-WORKDIR /usr/src/app
-
-ONBUILD RUN set -x \
+RUN set -x \
     && apk add --update --upgrade --no-cache --virtual .build-packages openssl-dev \
         ca-certificates wget curl-dev build-base alpine-sdk linux-headers paxctl \
         make gcc g++ libgcc libstdc++ gnupg postgresql-dev \
@@ -34,8 +32,9 @@ ONBUILD RUN set -x \
     && bundle install --jobs=${CPU_CORES} --without development test \
     && apk del .build-packages
 
-ONBUILD COPY app /usr/src/app
+COPY . /usr/src/app/
 
+WORKDIR /usr/src/app
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["unicorn", "-c", "/usr/src/app/config/unicorn.rb", "-E", "production", "-o", "0.0.0.0"]
 
