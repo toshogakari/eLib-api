@@ -60,8 +60,8 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation)
     load Rails.root.join('db', 'seeds.rb')
+    DatabaseCleaner.clean_with(:truncation)
   end
 
   config.before(:each) do
