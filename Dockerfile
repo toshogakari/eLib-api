@@ -37,6 +37,6 @@ ONBUILD RUN set -x \
 ONBUILD COPY app /usr/src/app
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["unicorn", "-c", "/usr/src/app/config/unicorn.rb", "-E", "production", "-p", "9000", "-o", "0.0.0.0"]
+CMD ["unicorn", "-c", "/usr/src/app/config/unicorn.rb", "-E", "production", "-o", "0.0.0.0"]
 
 EXPOSE 9000
