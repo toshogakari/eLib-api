@@ -1,6 +1,6 @@
 if ENV['CI'] == "true"
   require 'coveralls'
-  Coveralls.wear!
+  Coveralls.wear!('rails')
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
