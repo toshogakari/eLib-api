@@ -29,7 +29,6 @@ module ELibApi
 
     # rspec configure
     config.generators do |g|
-      g.helper false
       g.test_framework :rspec,
                        fixtures: true,
                        view_specs: false,
